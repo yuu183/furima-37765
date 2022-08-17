@@ -1,24 +1,66 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| password           | string | null: false |
+| first_name         | string | null: false |
+| last_name          | string | null: false |
+| first_name_kana    | string | null: false |
+| last_name_kana     | string | null: false |
+| barth_date         | date   | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :orders
 
-* Configuration
 
-* Database creation
+## orders テーブル
 
-* Database initialization
+| Column | Type   | Options                        |
+| ------ | ------ | ------------------------------ |
+| user   | string | null: false, foreign_key: true |
+| item   | string | null: false, foreign_key: true |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- has_one :item
+- has_one :address
 
-* Deployment instructions
+## items テーブル
 
-* ...
+| Column           | Type       | Options     |
+| -----------------| ---------- | ----------- |
+| item_name        | string     | null: false |
+| description      | text       | null: false |
+| category         | string     | null: false |
+| condition        | string     | null: false |
+| delivery_charge  | integer    | null: false |
+| sender_address   | integer    | null: false |
+| shipping_days    | integer    | null: false |
+| price            | integer    | null: false |
+
+### Association
+
+- belongs_to :user
+- has_one :oder
+
+## addresses テーブル
+
+| Column     | Type       | Options     |
+| ---------- | ---------- | ----------- |
+| post_code  | integer    | null: false |
+| prefecture | string     | null: false |
+| city       | string     | null: false |
+| address    | integer    | null: false |
+| building   | string     |             |
+| phone      | integer    | null: false |
+
+### Association
+
+- has_one :order
