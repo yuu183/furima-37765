@@ -11,4 +11,13 @@ class OderForm
     validates :city
     validates :adress
     validates :phone, format: { with: /\A[0-9]{11}\z/, message: 'is invalid' }
+    validates :token
+  end
+
+  def save
+    order = Order.create(user_id: user_id, item_id: item_id)
+    # ストロングパラメーターでデータが運ばれ、それらが保存のタイミングで「order_id」が生成され、保存される。
+    Adress.create(order_id: order.id, post_code: post_code, prefecture_id: prefecture_id, city: city, adress: adress, building: building, phone: phone)
+  end
+
 end
