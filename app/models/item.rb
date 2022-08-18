@@ -6,9 +6,6 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_day
 
-  #ジャンルの選択が「---」の時は保存できないようにする
-  validates :genre_id, numericality: { other_than: 1 } 
-
   belongs_to :user
   has_one_attached :image
 
@@ -20,16 +17,15 @@ class Item < ApplicationRecord
     validates :delivery_charge_id
     validates :prefecture_id
     validates :shipping_day_id
-    validates :price
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
     validates :user_id
   end
 
-  with_options numericality: { other_than: 1 , message: "can't be blank"}  do
+  with_options numericality: { other_than: 1 } do
     validates :category_id
     validates :condition_id
     validates :delivery_charge_id
     validates :prefecture_id
     validates :shipping_day_id
   end
-
 end
