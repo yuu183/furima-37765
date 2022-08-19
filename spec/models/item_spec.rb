@@ -25,12 +25,6 @@ RSpec.describe User, type: :model do
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
 
-      it '価格の情報が空では登録できない' do
-        @item.price = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank")
-      end
-
       it 'カテゴリーの情報が「---」では登録できない' do
         @item.category_id = ''
         @item.valid?
@@ -71,6 +65,18 @@ RSpec.describe User, type: :model do
         @item.price = 100000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price Out of setting range')
+      end
+
+      it '価格の情報が空では登録できない' do
+        @item.price = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
+
+      it '価格が全角文字を含むと登録できないこと' do
+        @item.price = 'あああ'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Out of setting range")
       end
 
       it 'ユーザーが紐付いていないと登録できない' do
