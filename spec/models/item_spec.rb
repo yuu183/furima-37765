@@ -68,13 +68,13 @@ RSpec.describe User, type: :model do
       end
 
       it '価格の情報が空では登録できない' do
-        @item.price = ''
+        @item.price = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include("Price can't be blank")
       end
 
       it '価格が全角文字を含むと登録できないこと' do
-        @item.price = 'あああ'
+        @item.price = '２２２２'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Out of setting range")
       end

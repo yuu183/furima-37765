@@ -22,6 +22,6 @@ class Item < ApplicationRecord
     validates :image
   end
 
-  validates :price, format: { with: /\A[0-9]+\z/, message: 'Price Half-width number' }, inclusion: { in: (300..9_999_999), message: 'Out of setting range' }
+  validates :price, numericality: { only_integer: true }, inclusion: { in: (300..9_999_999), message: 'Out of setting range' }
   
 end
