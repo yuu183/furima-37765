@@ -1,3 +1,5 @@
+equire 'rails_helper'
+
 RSpec.describe OrderForm, type: :model do
   before do
     @order_form = FactoryBot.build(:order_form)
@@ -8,7 +10,8 @@ RSpec.describe OrderForm, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@order_form).to be_valid
       end
-
+    end
+    
     context '配送先情報の保存ができないとき' do
       it 'user_idが空だと保存できない' do
         @order_form.user_id = ''
