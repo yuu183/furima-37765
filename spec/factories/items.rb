@@ -4,7 +4,7 @@ FactoryBot.define do
 
     item_name          { Faker::Name.name }
     description        { Faker::Lorem.sentence }
-    price              { "3000" }
+    price              { '3000' }
     category_id        { 2 }
     condition_id       { 2 }
     delivery_charge_id { 2 }

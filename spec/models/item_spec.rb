@@ -62,7 +62,7 @@ RSpec.describe User, type: :model do
       end
 
       it '価格は,10,000,000以上だと登録できない' do
-        @item.price = 100000000
+        @item.price = 100_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
@@ -76,7 +76,7 @@ RSpec.describe User, type: :model do
       it '価格が全角文字を含むと登録できないこと' do
         @item.price = '２２２２'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
 
       it 'ユーザーが紐付いていないと登録できない' do

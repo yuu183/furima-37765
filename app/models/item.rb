@@ -23,5 +23,4 @@ class Item < ApplicationRecord
   end
 
   validates :price, numericality: { only_integer: true }, inclusion: { in: (300..9_999_999), message: 'Out of setting range' }
-  
 end
